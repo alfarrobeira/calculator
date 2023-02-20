@@ -1,2 +1,2 @@
 # calculator
-Simple calcutator application with OOP JavaScript
+Simple calculator application with OOP JavaScript

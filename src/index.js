@@ -1,5 +1,6 @@
 class Calculator {
   // private fields ----------------------
+
   #calculatorScreen = document.querySelector("#calculator .screen");
   #calculatorButtons = document.querySelectorAll("#calculator span");
   #clearButton = document.querySelector("#calculator .clear");
@@ -9,11 +10,13 @@ class Calculator {
   #history = [];
 
   // constructor -------------------------
+
   constructor() {
     this.#addListeners();
   }
 
-  // public properties
+  // public properties -------------------
+
   get calculatorScreenText() {
     return this.#calculatorScreen.innerText;
   }
@@ -48,7 +51,7 @@ class Calculator {
 
   // todo: call from destructor
   #removeListeners() {
-    // listen to every key on the calculator and call function to add the value on the screen
+    // remove EventListener  from every key on the calculator
     this.#calculatorButtons.forEach((key) => {
       if (key.innerText !== "=") {
         key.removeEventListener("click", (e) =>
@@ -60,12 +63,12 @@ class Calculator {
     // remove EventListener from to click on clear key
     this.#clearButton.removeEventListener("click", () => this.#clearInput());
 
-    // listen to click on "=" key
+    // remove EventListener click on "=" key
     this.#equalsButton.removeEventListener("click", () =>
       this.#evaluate(this.calculatorScreenText)
     );
 
-    // listen to click on clear history button
+    // remove EventListener from click on clear history button
     this.#clearHistoryButton.removeEventListener("click", () =>
       this.#clearHistory()
     );
@@ -87,15 +90,15 @@ class Calculator {
     this.calculatorScreenText += val;
   }
 
+  // clear input from the screen
+  #clearInput() {
+    this.calculatorScreenText = "";
+  }
+
   // add the input from the screen to the history array and update view
   #addHistory(input) {
     this.#history.push(input);
     this.#updateHistoryView();
-  }
-
-  // clear input
-  #clearInput() {
-    this.calculatorScreenText = "";
   }
 
   // clear history array and update view
@@ -104,6 +107,7 @@ class Calculator {
     this.#updateHistoryView();
   }
 
+  // clears history view and rebuilds it from history array
   #updateHistoryView() {
     let list = document.querySelector("#calculator .bottom ul");
     list.innerHTML = "";
@@ -117,4 +121,4 @@ class Calculator {
   }
 }
 
-let myCalc = new Calculator();
+const myCalc = new Calculator();
